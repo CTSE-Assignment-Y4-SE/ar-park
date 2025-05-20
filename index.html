@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/jeromeetienne/ar.js/1.7.6/aframe/build/aframe-ar.min.js"></script>
+  </head>
+  <body style="margin: 0; overflow: hidden;">
+    <a-scene embedded arjs>
+      <a-assets>
+        <a-asset-item id="tree-model" src="models/tree.obj"></a-asset-item>
+        <a-asset-item id="bench-model" src="models/bench.obj"></a-asset-item>
+        <a-asset-item id="fountain-model" src="models/fountain.obj"></a-asset-item>
+        <a-asset-item id="dog-model" src="models/dog.obj"></a-asset-item>
+        <a-asset-item id="lamp-model" src="models/lamppost.obj"></a-asset-item>
+        <audio id="park-sound" src="sounds/park-ambience.wav"></audio>
+      </a-assets>
+
+      <!-- Marker 1: Tree with rotation animation & ambient sound -->
+      <a-marker preset="hiro" id="marker-tree">
+        <a-entity obj-model="obj: #tree-model" scale="0.5 0.5 0.5" position="0 0 0"
+                  animation="property: rotation; to: 0 360 0; loop: true; dur: 8000; easing: linear">
+        </a-entity>
+        <a-entity sound="src: #park-sound; autoplay: true;"></a-entity>
+      </a-marker>
+
+      <!-- Marker 2: Bench with bounce animation -->
+      <a-marker preset="kanji" id="marker-bench">
+        <a-entity obj-model="obj: #bench-model" scale="0.5 0.5 0.5" position="0 0 0"
+                  animation="property: position; dir: alternate; to: 0 0.2 0; dur: 2000; loop: true">
+        </a-entity>
+      </a-marker>
+
+      <!-- Marker 3: Fountain with pulsing scale animation -->
+      <a-marker type="barcode" value="5" id="marker-fountain">
+        <a-entity obj-model="obj: #fountain-model" scale="0.5 0.5 0.5" position="0 0 0"
+                  animation="property: scale; dir: alternate; to: 0.7 0.7 0.7; dur: 3000; loop: true">
+        </a-entity>
+      </a-marker>
+
+      <!-- Marker 4: Dog with reverse rotation animation -->
+      <a-marker type="barcode" value="7" id="marker-dog">
+        <a-entity obj-model="obj: #dog-model" scale="0.5 0.5 0.5" position="0 0 0"
+                  animation="property: rotation; to: 0 -360 0; loop: true; dur: 6000; easing: linear">
+        </a-entity>
+      </a-marker>
+
+      <!-- Marker 5: Lamp Post with rotation animation -->
+      <a-marker type="barcode" value="9" id="marker-lamp">
+        <a-entity obj-model="obj: #lamp-model" scale="0.5 0.5 0.5" position="0 0 0"
+                  animation="property: rotation; to: 0 360 0; loop: true; dur: 5000; easing: linear">
+        </a-entity>
+      </a-marker>
+
+      <a-entity camera></a-entity>
+    </a-scene>
+  </body>
+</html>
